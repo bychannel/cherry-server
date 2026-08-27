@@ -15,8 +15,8 @@ import (
 
 var (
 	maxRobotNum       = 5000                    // 运行x个机器人
-	url               = "http://127.0.0.1:8081" // web node
-	addr              = "127.0.0.1:10011"       // 网关地址(正式环境通过区服列表获取)
+	webUrl            = "http://127.0.0.1:8081" // web node
+	gateAddr          = "127.0.0.1:10011"       // 网关地址(正式环境通过区服列表获取)
 	serverId    int32 = 10001                   // 测试的游戏服id
 	pid               = "2126001"               // 测试的sdk包id
 	printLog          = false                   // 是否输出详细日志
@@ -32,18 +32,18 @@ func main() {
 		accounts[key] = key
 	}
 
-	RegisterDevAccount(url, accounts)
+	RegisterDevAccount(webUrl, accounts)
 
 	for userName, password := range accounts {
 		time.Sleep(time.Duration(rand.Int31n(10)) * time.Millisecond)
-		go RunRobot(url, pid, userName, password, addr, serverId, printLog)
+		go RunRobot(webUrl, pid, userName, password, gateAddr, serverId, printLog)
 	}
 
 	wg.Wait()
 }
 
-func RegisterDevAccount(url string, accounts map[string]string) {
-	requestURL := fmt.Sprintf("%s/register", url)
+func RegisterDevAccount(webUrl string, accounts map[string]string) {
+	requestURL := fmt.Sprintf("%s/register", webUrl)
 
 	for key, val := range accounts {
 		params := map[string]string{
@@ -68,7 +68,7 @@ func RegisterDevAccount(url string, accounts map[string]string) {
 	}
 }
 
-func RunRobot(url, pid, userName, password, addr string, serverId int32, printLog bool) *Robot {
+func RunRobot(webUrl, pid, userName, password, gateAddr string, serverId int32, printLog bool) *Robot {
 
 	// 创建客户端
 	cli := New(
@@ -80,19 +80,19 @@ func RunRobot(url, pid, userName, password, addr string, serverId int32, printLo
 	cli.PrintLog = printLog
 
 	// 登录获取token
-	if err := cli.GetToken(url, pid, userName, password); err != nil {
+	if err := cli.GetLoginToken(webUrl, pid, userName, password); err != nil {
 		clog.Error(err)
 		return nil
 	}
 
 	// 根据地址连接网关
-	if err := cli.ConnectToTCP(addr); err != nil {
+	if err := cli.ConnectToTCP(gateAddr); err != nil {
 		clog.Error(err)
 		return nil
 	}
 
 	if cli.PrintLog {
-		clog.Infof("tcp connect %s is ok", addr)
+		clog.Infof("tcp connect %s is ok", gateAddr)
 	}
 
 	// 随机休眠
