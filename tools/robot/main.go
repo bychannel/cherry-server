@@ -1,7 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/bychannel/cherry-server/tools/robot/base"
+	"github.com/bychannel/cherry-server/tools/robot/conf"
 	"math/rand"
 	"sync"
 	"time"
@@ -10,33 +13,27 @@ import (
 	chttp "github.com/cherry-game/cherry/extend/http"
 	clog "github.com/cherry-game/cherry/logger"
 	pomeloClient "github.com/cherry-game/cherry/net/parser/pomelo/client"
-	jsoniter "github.com/json-iterator/go"
 )
 
-var (
-	maxRobotNum       = 5000                    // 运行x个机器人
-	webUrl            = "http://127.0.0.1:8081" // web node
-	gateAddr          = "127.0.0.1:10011"       // 网关地址(正式环境通过区服列表获取)
-	serverId    int32 = 10001                   // 测试的游戏服id
-	pid               = "2126001"               // 测试的sdk包id
-	printLog          = false                   // 是否输出详细日志
-)
+var cfg *conf.Config
 
 func main() {
+	cfg = conf.LoadConfig("./conf/config.json")
+
 	wg := sync.WaitGroup{}
 	wg.Add(1)
 
 	accounts := make(map[string]string)
-	for i := 1; i <= maxRobotNum; i++ {
+	for i := 1; i <= int(cfg.MaxRobotNum); i++ {
 		key := fmt.Sprintf("test%d", i)
 		accounts[key] = key
 	}
 
-	RegisterDevAccount(webUrl, accounts)
+	RegisterDevAccount(cfg.WebUrl, accounts)
 
 	for userName, password := range accounts {
 		time.Sleep(time.Duration(rand.Int31n(10)) * time.Millisecond)
-		go RunRobot(webUrl, pid, userName, password, gateAddr, serverId, printLog)
+		go RunRobot(cfg.WebUrl, cfg.Pid, userName, password, cfg.GateAddr, cfg.ServerId, cfg.PrintLog)
 	}
 
 	wg.Wait()
@@ -58,7 +55,7 @@ func RegisterDevAccount(webUrl string, accounts map[string]string) {
 		}
 
 		rsp := &code.Result{}
-		err = jsoniter.Unmarshal(jsonBytes, rsp)
+		err = json.Unmarshal(jsonBytes, rsp)
 		if err != nil {
 			clog.Warn(err)
 			return
@@ -68,10 +65,10 @@ func RegisterDevAccount(webUrl string, accounts map[string]string) {
 	}
 }
 
-func RunRobot(webUrl, pid, userName, password, gateAddr string, serverId int32, printLog bool) *Robot {
+func RunRobot(webUrl, pid, userName, password, gateAddr string, serverId int32, printLog bool) *base.Robot {
 
 	// 创建客户端
-	cli := New(
+	cli := base.New(
 		pomeloClient.New(
 			pomeloClient.WithRequestTimeout(10*time.Second),
 			pomeloClient.WithErrorBreak(true),
