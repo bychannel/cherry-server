@@ -6,7 +6,6 @@ import (
 	"github.com/bychannel/cherry-server/nodes/web/controller"
 	"github.com/bychannel/cherry-server/nodes/web/sdk"
 	"github.com/cherry-game/cherry"
-	cherryFile "github.com/cherry-game/cherry/extend/file"
 	cherryCron "github.com/cherry-game/components/cron"
 	cherryGin "github.com/cherry-game/components/gin"
 	"github.com/gin-gonic/gin"
@@ -44,16 +43,6 @@ func httpServerComponent(addr string) *cherryGin.Component {
 
 	// http server使用gin组件搭建，这里增加一个RecoveryWithZap中间件
 	httpServer.Use(cherryGin.RecoveryWithZap(true))
-
-	// 映射h5客户端静态文件到static目录，例如：http://127.0.0.1/static/protocol.js
-	httpServer.Static("/static", "./static/")
-
-	// 加载./view目录的html模板文件(详情查看gin文档)
-	viewFiles := cherryFile.WalkFiles("./view/", ".html")
-	if len(viewFiles) < 1 {
-		panic("view files not found.")
-	}
-	httpServer.LoadHTMLFiles(viewFiles...)
 
 	// 注册 controller
 	httpServer.Register(new(controller.Controller))
