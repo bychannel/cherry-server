@@ -29,6 +29,7 @@ func main() {
 		accounts[key] = key
 	}
 
+	// 第一步，先到web节点进行账号注册
 	RegisterDevAccount(cfg.WebUrl, accounts)
 
 	for userName, password := range accounts {

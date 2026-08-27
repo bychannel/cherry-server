@@ -11,30 +11,20 @@ import (
 	cherryGin "github.com/cherry-game/components/gin"
 )
 
-type Controller struct {
+type LoginController struct {
 	cherryGin.BaseController
 }
 
-func (p *Controller) Init() {
+func (p *LoginController) Init() {
 	group := p.Group("/")
-	group.GET("/hello", p.hello)
 	group.GET("/register", p.register)
 	group.GET("/login", p.login)
 	group.GET("/server/list/:pid", p.serverList)
 }
 
-// hello 输出json示例
-// http://127.0.0.1/hello
-func (p *Controller) hello(c *cherryGin.Context) {
-	// 输出json
-	code.RenderResult(c, code.OK, map[string]string{
-		"data": "hello",
-	})
-}
-
 // register 开发模式帐号注册
 // http://127.0.0.1/register?account=test11&password=test11
-func (p *Controller) register(c *cherryGin.Context) {
+func (p *LoginController) register(c *cherryGin.Context) {
 	accountName := c.GetString("account", "", true)
 	password := c.GetString("password", "", true)
 
@@ -44,7 +34,7 @@ func (p *Controller) register(c *cherryGin.Context) {
 
 // login 根据pid获取sdkConfig，与第三方进行帐号登陆效验
 // http://127.0.0.1/login?pid=2126001&account=test1&password=test1
-func (p *Controller) login(c *cherryGin.Context) {
+func (p *LoginController) login(c *cherryGin.Context) {
 	pid := c.GetInt32("pid", 0, true)
 
 	if pid < 1 {
@@ -102,7 +92,7 @@ func (p *Controller) login(c *cherryGin.Context) {
 
 // severList 区服列表
 // http://127.0.0.1/server/list/2126001
-func (p *Controller) serverList(c *cherryGin.Context) {
+func (p *LoginController) serverList(c *cherryGin.Context) {
 	pid := c.GetInt32("pid", 2126001)
 
 	if pid < 1 {

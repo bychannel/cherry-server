@@ -45,7 +45,7 @@ func httpServerComponent(addr string) *cherryGin.Component {
 	httpServer.Use(cherryGin.RecoveryWithZap(true))
 
 	// 注册 controller
-	httpServer.Register(new(controller.Controller))
+	httpServer.Register(new(controller.LoginController))
 
 	return httpServer
 }
