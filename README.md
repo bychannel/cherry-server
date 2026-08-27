@@ -16,7 +16,7 @@
 
 ## 配置
 
-- 参数配置文件在 `../config/demo-cluster.json`
+- 参数配置文件在 `../config/cluster.json`
 - 策划配置文件在 `../config/data/`
 
 ## 准备
@@ -44,11 +44,11 @@
 - 找到`demo_cluster/nodes/main.go`，所有节点都从`main.go`启动
 - `VSCode`用户在左侧栏找到`运行和调试(Debug)`按钮,启动`gc-master`、`gc-center`、`gc-web-1`、`gc-gate-1`、`gc-game-10001`
 - `GoLand`用户配置启动参数(`Program arguments`)如下：
-  - `gc-master`       master --path=./config/demo-cluster.json --node=gc-master
-  - `gc-center`       center --path=./config/demo-cluster.json --node=gc-center
-  - `gc-web-1`        web --path=./config/demo-cluster.json --node=gc-web-1
-  - `gc-gate-1`       gate --path=./config/demo-cluster.json --node=gc-gate-1
-  - `gc-game-10001`   game --path=./config/demo-cluster.json --node=10001
+  - `gc-master`       master --path=./config/cluster.json --node=gc-master
+  - `gc-center`       center --path=./config/cluster.json --node=gc-center
+  - `gc-web-1`        web --path=./config/cluster.json --node=gc-web-1
+  - `gc-gate-1`       gate --path=./config/cluster.json --node=gc-gate-1
+  - `gc-game-10001`   game --path=./config/cluster.json --node=10001
 
 
 ## 测试

@@ -47,7 +47,7 @@ func masterCommand() *cli.Command {
 	return &cli.Command{
 		Name:      "master",
 		Usage:     "run master node",
-		UsageText: "node master --path=../../config/demo-cluster.json --node=gc-master",
+		UsageText: "node master --path=../../config/cluster.json --node=gc-master",
 		Flags:     getFlag(),
 		Action: func(c *cli.Context) error {
 			path, node := getParameters(c)
@@ -61,7 +61,7 @@ func centerCommand() *cli.Command {
 	return &cli.Command{
 		Name:      "center",
 		Usage:     "run center node",
-		UsageText: "node center --path=../../config/demo-cluster.json --node=gc-center",
+		UsageText: "node center --path=../../config/cluster.json --node=gc-center",
 		Flags:     getFlag(),
 		Action: func(c *cli.Context) error {
 			path, node := getParameters(c)
@@ -75,7 +75,7 @@ func webCommand() *cli.Command {
 	return &cli.Command{
 		Name:      "web",
 		Usage:     "run web node",
-		UsageText: "node web --path=../../config/demo-cluster.json --node=gc-web-1",
+		UsageText: "node web --path=../../config/cluster.json --node=gc-web-1",
 		Flags:     getFlag(),
 		Action: func(c *cli.Context) error {
 			path, node := getParameters(c)
@@ -89,7 +89,7 @@ func gateCommand() *cli.Command {
 	return &cli.Command{
 		Name:      "gate",
 		Usage:     "run gate node",
-		UsageText: "node gate --path=../../config/demo-cluster.json --node=gc-gate-1",
+		UsageText: "node gate --path=../../config/cluster.json --node=gc-gate-1",
 		Flags:     getFlag(),
 		Action: func(c *cli.Context) error {
 			path, node := getParameters(c)
@@ -103,7 +103,7 @@ func gameCommand() *cli.Command {
 	return &cli.Command{
 		Name:      "game",
 		Usage:     "run game node",
-		UsageText: "node game --path=../../config/demo-cluster.json --node=10001",
+		UsageText: "node game --path=../../config/cluster.json --node=10001",
 		Flags:     getFlag(),
 		Action: func(c *cli.Context) error {
 			path, node := getParameters(c)
@@ -125,7 +125,7 @@ func getFlag() []cli.Flag {
 			Name:     "path",
 			Usage:    "profile config path",
 			Required: false,
-			Value:    "../../config/demo-cluster.json",
+			Value:    "../../config/cluster.json",
 		},
 		&cli.StringFlag{
 			Name:     "node",

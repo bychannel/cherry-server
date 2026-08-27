@@ -2,6 +2,11 @@
   "env": "gc",
   "debug": true,
   "print_level": "info",
+  "include": [
+    "include/logger.json",
+    "include/data-config.json"
+  ],
+  "@include": "include用于引用其他的配置文件。多环境配置的开发过程中可以抽像一些通用的配置",
   "cluster": {
     "discovery": {
       "mode": "nats",
@@ -45,7 +50,7 @@
         "node_id": "^gc-gate-\\d+$",
         "address": ":10010",
         "__settings__": {
-          "db_id_list" : {
+          "db_id_list": {
             "game_db_id": "game_db_1"
           },
           "ref_logger": "gate_log"
@@ -58,7 +63,7 @@
         "node_id": "gc-web-1",
         "address": "127.0.0.1:8081",
         "__settings__": {
-          "ref_logger": "master_log"
+          "ref_logger": "web_log"
         },
         "enable": true
       }
@@ -67,7 +72,7 @@
       {
         "node_id": "^\\d+$",
         "__settings__": {
-          "db_id_list" : {
+          "db_id_list": {
             "game_db_id": "game_db_1"
           },
           "ref_logger": "game_log"
@@ -75,58 +80,5 @@
         "enable": true
       }
     ]
-  },
-  "logger": {
-    "master_log": {
-      "level": "debug",
-      "enable_console": true,
-      "enable_write_file": false,
-      "file_link_path": "logs/master.log",
-      "file_path_format": "logs/master_%Y%m%d%H%M.log"
-    },
-    "center_log": {
-      "level": "debug",
-      "enable_console": true,
-      "enable_write_file": false,
-      "file_link_path": "logs/center.log",
-      "file_path_format": "logs/center_%Y%m%d%H%M.log"
-    },
-    "gate_log": {
-      "level": "debug",
-      "enable_console": true,
-      "enable_write_file": false,
-      "file_link_path": "logs/gate.log",
-      "file_path_format": "logs/gate_%Y%m%d%H%M.log"
-    },
-    "game_log": {
-      "level": "debug",
-      "enable_console": true,
-      "enable_write_file": false,
-      "file_link_path": "logs/game.log",
-      "file_path_format": "logs/game_%Y%m%d%H%M.log"
-    },
-    "cross_log": {
-      "level": "debug",
-      "enable_console": true,
-      "enable_write_file": false,
-      "file_link_path": "logs/cross.log",
-      "file_path_format": "logs/cross_%Y%m%d%H%M.log"
-    }
-  },
-  "data_config": {
-    "parser": "json",
-    "data_source": "file",
-    "file": {
-      "file_path": "data/",
-      "ext_name": ".json",
-      "reload_time": 3000
-    },
-    "redis": {
-      "prefix_key": "data_config",
-      "subscribe_key": "data_config_change",
-      "address": "127.0.0.1:6379",
-      "password": "",
-      "db": 7
-    }
   }
 }

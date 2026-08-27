@@ -32,11 +32,11 @@ nats-server
 所有节点从 `nodes/main.go` 启动，使用 urfave/cli 框架：
 ```bash
 # 在 nodes 目录下执行
-go run main.go master --path=../../config/demo-cluster.json --node=gc-master
-go run main.go center --path=../../config/demo-cluster.json --node=gc-center
-go run main.go web --path=../../config/demo-cluster.json --node=gc-web-1
-go run main.go gate --path=../../config/demo-cluster.json --node=gc-gate-1
-go run main.go game --path=../../config/demo-cluster.json --node=10001
+go run main.go master --path=../../config/cluster.json --node=gc-master
+go run main.go center --path=../../config/cluster.json --node=gc-center
+go run main.go web --path=../../config/cluster.json --node=gc-web-1
+go run main.go gate --path=../../config/cluster.json --node=gc-gate-1
+go run main.go game --path=../../config/cluster.json --node=10001
 ```
 
 ### 生成 Protobuf 代码

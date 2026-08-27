@@ -8,12 +8,12 @@
       "max_age": 7,
       "time_format": "15:04:05.000",
       "print_caller": true,
-      "rotation_time": 3600,
+      "rotation_time": 86400,
       "@rotation_time": [
         "3600(秒):每小时分割日志",
         "86400(秒):每天分割日志"
       ],
-      "file_link_path": "logs/game.link",
+      "file_link_path": "logs/game.log",
       "file_path_format": "logs/game_%Y%m%d%H%M.log"
     },
     "master_log": {
@@ -23,26 +23,26 @@
       "file_link_path": "logs/master.log",
       "file_path_format": "logs/master_%Y%m%d%H%M.log"
     },
-    "room_log": {
+    "center_log": {
       "level": "debug",
       "enable_console": true,
       "enable_write_file": false,
-      "file_link_path": "logs/room.log",
-      "file_path_format": "logs/room_%Y%m%d%H%M.log"
+      "file_link_path": "logs/center.log",
+      "file_path_format": "logs/center_%Y%m%d%H%M.log"
     },
-    "log_log": {
+    "web_log": {
       "level": "debug",
       "enable_console": true,
       "enable_write_file": false,
-      "file_link_path": "logs/log.log",
-      "file_path_format": "logs/log_%Y%m%d%H%M.log"
+      "file_link_path": "logs/web.log",
+      "file_path_format": "logs/web_%Y%m%d%H%M.log"
     },
-    "test_handler": {
+    "gate_log": {
       "level": "debug",
-      "enable_console": false,
-      "enable_write_file": true,
-      "file_link_path": "logs/test_handler.log",
-      "file_path_format": "logs/test_handler_%Y%m%d%H%M.log"
+      "enable_console": true,
+      "enable_write_file": false,
+      "file_link_path": "logs/gate.log",
+      "file_path_format": "logs/gate_%Y%m%d%H%M.log"
     }
   }
 }
