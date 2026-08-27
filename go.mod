@@ -8,7 +8,6 @@ require (
 	github.com/cherry-game/components/data-config v1.4.0
 	github.com/cherry-game/components/gin v1.4.0
 	github.com/cherry-game/components/gops v1.4.0
-	github.com/cherry-game/examples v0.0.0-20250629054034-889d6e3bb2eb
 	github.com/gin-gonic/gin v1.9.1
 	github.com/goburrow/cache v0.1.4
 	github.com/json-iterator/go v1.1.12

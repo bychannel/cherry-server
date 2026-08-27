@@ -16,8 +16,6 @@ github.com/cherry-game/components/gin v1.4.0 h1:2GmNHvQivGmwL9kb8oMh9sDrWp4lSqNF
 github.com/cherry-game/components/gin v1.4.0/go.mod h1:ugqS+xZslRDircA8e0pcvQ1WN+JIbot8p27ApRaTRNY=
 github.com/cherry-game/components/gops v1.4.0 h1:6FqlWoYddFGsfUDlVV7gtFUuSp1nrGFts8YhjsrclAI=
 github.com/cherry-game/components/gops v1.4.0/go.mod h1:GN6n1UJamrvCTszEOsyXoCyxsFZBQKZi+vByn/V3F9M=
-github.com/cherry-game/examples v0.0.0-20250629054034-889d6e3bb2eb h1:XAOhgNuRzhMoJBgIfot4e3MsTvRvmLzZRDYtDVsgW2k=
-github.com/cherry-game/examples v0.0.0-20250629054034-889d6e3bb2eb/go.mod h1:nhitg87+8da2d0eswTdyWiAH3e3x7a86jbUdjcFf+nE=
 github.com/cpuguy83/go-md2man/v2 v2.0.2 h1:p1EgwI/C7NhT0JmVkwCD2ZBK8j4aeHQX2pMHHBfMQ6w=
 github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
