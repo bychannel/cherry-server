@@ -13,6 +13,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 常用命令
 
+### 编译
+```bash
+make.bat              # Windows 编译所有节点到 bin/ 目录
+```
+
 ### 启动 NATS
 ```bash
 # Docker 方式（推荐）
