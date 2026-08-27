@@ -5,13 +5,13 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/pb"
 	cherryError "github.com/cherry-game/cherry/error"
 	cherryHttp "github.com/cherry-game/cherry/extend/http"
 	cherryTime "github.com/cherry-game/cherry/extend/time"
 	cherryLogger "github.com/cherry-game/cherry/logger"
 	cherryClient "github.com/cherry-game/cherry/net/parser/pomelo/client"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/pb"
 	jsoniter "github.com/json-iterator/go"
 )
 
@@ -43,9 +43,9 @@ func (p *Robot) GetToken(url string, pid, userName, password string) error {
 	// http登陆获取token json对象
 	requestURL := fmt.Sprintf("%s/login", url)
 	jsonBytes, _, err := cherryHttp.GET(requestURL, map[string]string{
-		"pid":      pid,      //sdk包id
-		"account":  userName, //帐号名
-		"password": password, //密码
+		"pid":      pid,      // sdk包id
+		"account":  userName, // 帐号名
+		"password": password, // 密码
 	})
 
 	if err != nil {

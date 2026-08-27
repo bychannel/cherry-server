@@ -1,9 +1,9 @@
 package data
 
 import (
+	"github.com/bychannel/cherry-server/internal/types"
 	cherryMapStructure "github.com/cherry-game/cherry/extend/mapstructure"
 	cherryDataConfig "github.com/cherry-game/components/data-config"
-	"github.com/cherry-game/examples/demo_cluster/internal/types"
 )
 
 var (

@@ -1,13 +1,13 @@
 package db
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/data"
+	"github.com/bychannel/cherry-server/internal/guid"
+	sessionKey "github.com/bychannel/cherry-server/internal/session_key"
 	ctime "github.com/cherry-game/cherry/extend/time"
 	clog "github.com/cherry-game/cherry/logger"
 	cproto "github.com/cherry-game/cherry/net/proto"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
-	"github.com/cherry-game/examples/demo_cluster/internal/guid"
-	sessionKey "github.com/cherry-game/examples/demo_cluster/internal/session_key"
 )
 
 // PlayerTable 角色基础表

@@ -1,14 +1,14 @@
 package web
 
 import (
+	checkCenter "github.com/bychannel/cherry-server/internal/component/check_center"
+	"github.com/bychannel/cherry-server/internal/data"
+	"github.com/bychannel/cherry-server/nodes/web/controller"
+	"github.com/bychannel/cherry-server/nodes/web/sdk"
 	"github.com/cherry-game/cherry"
 	cherryFile "github.com/cherry-game/cherry/extend/file"
 	cherryCron "github.com/cherry-game/components/cron"
 	cherryGin "github.com/cherry-game/components/gin"
-	checkCenter "github.com/cherry-game/examples/demo_cluster/internal/component/check_center"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
-	"github.com/cherry-game/examples/demo_cluster/nodes/web/controller"
-	"github.com/cherry-game/examples/demo_cluster/nodes/web/sdk"
 	"github.com/gin-gonic/gin"
 )
 
@@ -55,7 +55,7 @@ func httpServerComponent(addr string) *cherryGin.Component {
 	}
 	httpServer.LoadHTMLFiles(viewFiles...)
 
-	//注册 controller
+	// 注册 controller
 	httpServer.Register(new(controller.Controller))
 
 	return httpServer

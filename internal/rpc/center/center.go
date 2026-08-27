@@ -1,10 +1,10 @@
 package rpcCenter
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/pb"
 	cfacade "github.com/cherry-game/cherry/facade"
 	clog "github.com/cherry-game/cherry/logger"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/pb"
 )
 
 // route = 节点类型.节点handler.remote函数

@@ -1,15 +1,15 @@
 package gate
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/pb"
+	sessionKey "github.com/bychannel/cherry-server/internal/session_key"
 	cslice "github.com/cherry-game/cherry/extend/slice"
 	cstring "github.com/cherry-game/cherry/extend/string"
 	cfacade "github.com/cherry-game/cherry/facade"
 	"github.com/cherry-game/cherry/net/parser/pomelo"
 	pmessage "github.com/cherry-game/cherry/net/parser/pomelo/message"
 	cproto "github.com/cherry-game/cherry/net/proto"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/pb"
-	sessionKey "github.com/cherry-game/examples/demo_cluster/internal/session_key"
 )
 
 var (
@@ -18,9 +18,9 @@ var (
 
 	// 角色进入游戏时的前三个协议
 	beforeLoginRoutes = []string{
-		"game.player.select", //查询玩家角色
-		"game.player.create", //玩家创建角色
-		"game.player.enter",  //玩家角色进入游戏
+		"game.player.select", // 查询玩家角色
+		"game.player.create", // 玩家创建角色
+		"game.player.enter",  // 玩家角色进入游戏
 	}
 
 	notLoginRsp = &pb.Int32{

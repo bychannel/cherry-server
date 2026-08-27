@@ -1,11 +1,11 @@
 package sdk
 
 import (
+	"github.com/bychannel/cherry-server/internal/data"
 	cherryError "github.com/cherry-game/cherry/error"
 	cherryString "github.com/cherry-game/cherry/extend/string"
 	cfacade "github.com/cherry-game/cherry/facade"
 	cherryGin "github.com/cherry-game/components/gin"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
 )
 
 // sdk平台类型

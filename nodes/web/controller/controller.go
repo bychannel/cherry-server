@@ -1,14 +1,14 @@
 package controller
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/data"
+	rpcCenter "github.com/bychannel/cherry-server/internal/rpc/center"
+	"github.com/bychannel/cherry-server/internal/token"
+	"github.com/bychannel/cherry-server/nodes/web/sdk"
 	cherryString "github.com/cherry-game/cherry/extend/string"
 	cherryLogger "github.com/cherry-game/cherry/logger"
 	cherryGin "github.com/cherry-game/components/gin"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
-	rpcCenter "github.com/cherry-game/examples/demo_cluster/internal/rpc/center"
-	"github.com/cherry-game/examples/demo_cluster/internal/token"
-	"github.com/cherry-game/examples/demo_cluster/nodes/web/sdk"
 )
 
 type Controller struct {

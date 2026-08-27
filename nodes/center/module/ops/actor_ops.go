@@ -1,9 +1,9 @@
 package ops
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/pb"
 	cactor "github.com/cherry-game/cherry/net/actor"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/pb"
 )
 
 var (

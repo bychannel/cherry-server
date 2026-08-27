@@ -1,12 +1,12 @@
 package center
 
 import (
+	"github.com/bychannel/cherry-server/internal/data"
+	"github.com/bychannel/cherry-server/nodes/center/db"
+	"github.com/bychannel/cherry-server/nodes/center/module/account"
+	"github.com/bychannel/cherry-server/nodes/center/module/ops"
 	"github.com/cherry-game/cherry"
 	cherryCron "github.com/cherry-game/components/cron"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
-	"github.com/cherry-game/examples/demo_cluster/nodes/center/db"
-	"github.com/cherry-game/examples/demo_cluster/nodes/center/module/account"
-	"github.com/cherry-game/examples/demo_cluster/nodes/center/module/ops"
 )
 
 func Run(profileFilePath, nodeID string) {

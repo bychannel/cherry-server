@@ -1,15 +1,15 @@
 package data
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
 	cherryError "github.com/cherry-game/cherry/error"
 	cherryLogger "github.com/cherry-game/cherry/logger"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
 )
 
 type (
 	codeRow struct {
-		Code    int32  `json:"code"`    //提示代码
-		Message string `json:"message"` //消息内容
+		Code    int32  `json:"code"`    // 提示代码
+		Message string `json:"message"` // 消息内容
 	}
 
 	// 状态码列表

@@ -2,12 +2,12 @@ package player
 
 import (
 	"time"
-
+	
+	"github.com/bychannel/cherry-server/internal/event"
+	"github.com/bychannel/cherry-server/nodes/game/module/online"
 	cfacade "github.com/cherry-game/cherry/facade"
 	clog "github.com/cherry-game/cherry/logger"
 	"github.com/cherry-game/cherry/net/parser/pomelo"
-	"github.com/cherry-game/examples/demo_cluster/internal/event"
-	"github.com/cherry-game/examples/demo_cluster/nodes/game/module/online"
 )
 
 type (

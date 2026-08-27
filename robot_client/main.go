@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/bychannel/cherry-server/internal/code"
 	chttp "github.com/cherry-game/cherry/extend/http"
 	clog "github.com/cherry-game/cherry/logger"
 	pomeloClient "github.com/cherry-game/cherry/net/parser/pomelo/client"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
 	jsoniter "github.com/json-iterator/go"
 )
 
@@ -109,7 +109,7 @@ func RunRobot(url, pid, userName, password, addr string, serverId int32, printLo
 		clog.Infof("user login is ok. [user = %s, serverId = %d]", userName, serverId)
 	}
 
-	//cli.RandSleep()
+	// cli.RandSleep()
 
 	// 查看是否有角色
 	err = cli.PlayerSelect()
@@ -118,7 +118,7 @@ func RunRobot(url, pid, userName, password, addr string, serverId int32, printLo
 		return nil
 	}
 
-	//cli.RandSleep()
+	// cli.RandSleep()
 
 	// 创建角色
 	err = cli.ActorCreate()
@@ -127,7 +127,7 @@ func RunRobot(url, pid, userName, password, addr string, serverId int32, printLo
 		return nil
 	}
 
-	//cli.RandSleep()
+	// cli.RandSleep()
 
 	// 角色进入游戏
 	err = cli.ActorEnter()
@@ -139,7 +139,7 @@ func RunRobot(url, pid, userName, password, addr string, serverId int32, printLo
 	elapsedTime := cli.StartTime.NowDiffMillisecond()
 	clog.Debugf("[%s] is enter to game. elapsed time:%dms", cli.TagName, elapsedTime)
 
-	//cli.Disconnect()
+	// cli.Disconnect()
 
 	return cli
 }

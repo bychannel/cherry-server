@@ -3,9 +3,9 @@ package checkCenter
 import (
 	"time"
 
+	rpcCenter "github.com/bychannel/cherry-server/internal/rpc/center"
 	cherryFacade "github.com/cherry-game/cherry/facade"
 	cherryLogger "github.com/cherry-game/cherry/logger"
-	rpcCenter "github.com/cherry-game/examples/demo_cluster/internal/rpc/center"
 )
 
 // Component 启动时,检查center节点是否存活

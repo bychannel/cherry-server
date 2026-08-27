@@ -1,18 +1,18 @@
 package gate
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/data"
+	"github.com/bychannel/cherry-server/internal/pb"
+	rpcCenter "github.com/bychannel/cherry-server/internal/rpc/center"
+	sessionKey "github.com/bychannel/cherry-server/internal/session_key"
+	"github.com/bychannel/cherry-server/internal/token"
 	cstring "github.com/cherry-game/cherry/extend/string"
 	cfacade "github.com/cherry-game/cherry/facade"
 	clog "github.com/cherry-game/cherry/logger"
 	cactor "github.com/cherry-game/cherry/net/actor"
 	"github.com/cherry-game/cherry/net/parser/pomelo"
 	cproto "github.com/cherry-game/cherry/net/proto"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
-	"github.com/cherry-game/examples/demo_cluster/internal/pb"
-	rpcCenter "github.com/cherry-game/examples/demo_cluster/internal/rpc/center"
-	sessionKey "github.com/cherry-game/examples/demo_cluster/internal/session_key"
-	"github.com/cherry-game/examples/demo_cluster/internal/token"
 )
 
 var (

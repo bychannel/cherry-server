@@ -3,11 +3,11 @@ package rpcGame
 import (
 	"fmt"
 
+	"github.com/bychannel/cherry-server/internal/pb"
+	sessionKey "github.com/bychannel/cherry-server/internal/session_key"
 	cfacade "github.com/cherry-game/cherry/facade"
 	clog "github.com/cherry-game/cherry/logger"
 	cproto "github.com/cherry-game/cherry/net/proto"
-	"github.com/cherry-game/examples/demo_cluster/internal/pb"
-	sessionKey "github.com/cherry-game/examples/demo_cluster/internal/session_key"
 )
 
 const (
@@ -31,5 +31,5 @@ func SessionClose(app cfacade.IApplication, session *cproto.Session) {
 		Value: session.Uid,
 	})
 
-	//clog.Infof("send close session to game node. [node = %s, uid = %d]", nodeID, session.Uid)
+	// clog.Infof("send close session to game node. [node = %s, uid = %d]", nodeID, session.Uid)
 }

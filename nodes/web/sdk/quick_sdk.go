@@ -1,14 +1,14 @@
 package sdk
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/data"
+	sessionKey "github.com/bychannel/cherry-server/internal/session_key"
 	cerror "github.com/cherry-game/cherry/error"
 	cherryHttp "github.com/cherry-game/cherry/extend/http"
 	cstring "github.com/cherry-game/cherry/extend/string"
 	cherryLogger "github.com/cherry-game/cherry/logger"
 	cherryGin "github.com/cherry-game/components/gin"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
-	sessionKey "github.com/cherry-game/examples/demo_cluster/internal/session_key"
 )
 
 type (
@@ -54,7 +54,7 @@ func (quickSdk) Login(config *data.SdkRow, params Params, callback Callback) {
 	}
 
 	callback(code.OK, map[string]string{
-		sessionKey.OpenID: uid, //返回 quick的uid做为 open id
+		sessionKey.OpenID: uid, // 返回 quick的uid做为 open id
 	})
 }
 

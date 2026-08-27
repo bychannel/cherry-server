@@ -1,9 +1,9 @@
 package data
 
 import (
+	"github.com/bychannel/cherry-server/internal/types"
 	cherryError "github.com/cherry-game/cherry/error"
 	cherryLogger "github.com/cherry-game/cherry/logger"
-	"github.com/cherry-game/examples/demo_cluster/internal/types"
 )
 
 type (

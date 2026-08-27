@@ -1,17 +1,17 @@
 package player
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/data"
+	"github.com/bychannel/cherry-server/internal/event"
+	"github.com/bychannel/cherry-server/internal/pb"
+	sessionKey "github.com/bychannel/cherry-server/internal/session_key"
+	"github.com/bychannel/cherry-server/nodes/game/db"
+	"github.com/bychannel/cherry-server/nodes/game/module/online"
 	cstring "github.com/cherry-game/cherry/extend/string"
 	clog "github.com/cherry-game/cherry/logger"
 	"github.com/cherry-game/cherry/net/parser/pomelo"
 	cproto "github.com/cherry-game/cherry/net/proto"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
-	"github.com/cherry-game/examples/demo_cluster/internal/event"
-	"github.com/cherry-game/examples/demo_cluster/internal/pb"
-	sessionKey "github.com/cherry-game/examples/demo_cluster/internal/session_key"
-	"github.com/cherry-game/examples/demo_cluster/nodes/game/db"
-	"github.com/cherry-game/examples/demo_cluster/nodes/game/module/online"
 )
 
 type (
@@ -143,13 +143,13 @@ func (p *actorPlayer) playerEnter(session *cproto.Session, req *pb.Int64) {
 
 	// 这里改为客户端主动请求更佳
 	// [01]推送角色 道具数据
-	//module.Item.ListPush(session, playerId)
+	// module.Item.ListPush(session, playerId)
 	// [02]推送角色 英雄数据
-	//module.Hero.ListPush(session, playerId)
+	// module.Hero.ListPush(session, playerId)
 	// [03]推送角色 成就数据
-	//module.Achieve.CheckNewAndPush(playerId, true, true)
+	// module.Achieve.CheckNewAndPush(playerId, true, true)
 	// [04]推送角色 邮件数据
-	//module.Mail.ListPush(session, playerId)
+	// module.Mail.ListPush(session, playerId)
 
 	// [99]最后推送 角色进入游戏响应结果
 	response := &pb.PlayerEnterResponse{}

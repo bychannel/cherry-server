@@ -4,14 +4,14 @@ import (
 	"encoding/binary"
 	"time"
 
+	checkCenter "github.com/bychannel/cherry-server/internal/component/check_center"
+	"github.com/bychannel/cherry-server/internal/data"
 	"github.com/cherry-game/cherry"
 	cfacade "github.com/cherry-game/cherry/facade"
 	cconnector "github.com/cherry-game/cherry/net/connector"
 	"github.com/cherry-game/cherry/net/parser/pomelo"
 	"github.com/cherry-game/cherry/net/parser/simple"
 	cherryGops "github.com/cherry-game/components/gops"
-	checkCenter "github.com/cherry-game/examples/demo_cluster/internal/component/check_center"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
 )
 
 // Run 运行gate节点
@@ -27,7 +27,7 @@ func Run(profileFilePath, nodeID string) {
 
 	// 设置网络数据包解析器
 	netParser := buildPomeloParser(app)
-	//netParser := buildSimpleParser(app)
+	// netParser := buildSimpleParser(app)
 	app.SetNetParser(netParser)
 
 	app.Register(cherryGops.New())
@@ -36,18 +36,18 @@ func Run(profileFilePath, nodeID string) {
 	// 注册数据配表组件，具体详见data-config的使用方法和参数配置
 	app.Register(data.New())
 
-	//启动cherry引擎
+	// 启动cherry引擎
 	app.Startup()
 }
 
 func buildPomeloParser(app *cherry.AppBuilder) cfacade.INetParser {
 	// 使用pomelo网络数据包解析器
 	agentActor := pomelo.NewActor("user")
-	//创建一个tcp监听，用于client/robot压测机器人连接网关tcp
+	// 创建一个tcp监听，用于client/robot压测机器人连接网关tcp
 	agentActor.AddConnector(cconnector.NewTCP(":10011"))
-	//再创建一个websocket监听，用于h5客户端建立连接
+	// 再创建一个websocket监听，用于h5客户端建立连接
 	agentActor.AddConnector(cconnector.NewWS(app.Address()))
-	//当有新连接创建Agent时，启动一个自定义(ActorAgent)的子actor
+	// 当有新连接创建Agent时，启动一个自定义(ActorAgent)的子actor
 	agentActor.SetOnNewAgent(func(newAgent *pomelo.Agent) {
 		childActor := &ActorAgent{}
 		newAgent.AddOnClose(childActor.onSessionClose)
@@ -68,7 +68,7 @@ func buildSimpleParser(app *cherry.AppBuilder) cfacade.INetParser {
 
 	agentActor.SetOnNewAgent(func(newAgent *simple.Agent) {
 		childActor := &ActorAgent{}
-		//newAgent.AddOnClose(childActor.onSessionClose)
+		// newAgent.AddOnClose(childActor.onSessionClose)
 		agentActor.Child().Create(newAgent.SID(), childActor)
 	})
 
@@ -80,7 +80,7 @@ func buildSimpleParser(app *cherry.AppBuilder) cfacade.INetParser {
 	agentActor.SetWriteBacklog(64)
 
 	// 设置数据路由函数
-	//agentActor.SetOnDataRoute(onSimpleDataRoute)
+	// agentActor.SetOnDataRoute(onSimpleDataRoute)
 
 	// 设置消息节点路由(建议配合data-config组件进行使用)
 	// mid = 1 的消息路由到  gate节点.user的Actor.login函数上

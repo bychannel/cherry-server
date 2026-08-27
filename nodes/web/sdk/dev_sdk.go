@@ -1,13 +1,13 @@
 package sdk
 
 import (
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/data"
+	rpcCenter "github.com/bychannel/cherry-server/internal/rpc/center"
 	cherryError "github.com/cherry-game/cherry/error"
 	cherryString "github.com/cherry-game/cherry/extend/string"
 	cfacade "github.com/cherry-game/cherry/facade"
 	cherryGin "github.com/cherry-game/components/gin"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/data"
-	rpcCenter "github.com/cherry-game/examples/demo_cluster/internal/rpc/center"
 )
 
 type devSdk struct {

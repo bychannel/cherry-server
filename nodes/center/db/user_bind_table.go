@@ -2,9 +2,9 @@ package db
 
 import (
 	"fmt"
-
+	
+	"github.com/bychannel/cherry-server/internal/guid"
 	cherryTime "github.com/cherry-game/cherry/extend/time"
-	"github.com/cherry-game/examples/demo_cluster/internal/guid"
 )
 
 // UserBindTable uid绑定第三方平台表

@@ -3,10 +3,10 @@ package account
 import (
 	"strings"
 
+	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/internal/pb"
+	"github.com/bychannel/cherry-server/nodes/center/db"
 	cactor "github.com/cherry-game/cherry/net/actor"
-	"github.com/cherry-game/examples/demo_cluster/internal/code"
-	"github.com/cherry-game/examples/demo_cluster/internal/pb"
-	"github.com/cherry-game/examples/demo_cluster/nodes/center/db"
 )
 
 type (

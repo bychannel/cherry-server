@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/bychannel/cherry-server/nodes/center"
+	"github.com/bychannel/cherry-server/nodes/game"
+	"github.com/bychannel/cherry-server/nodes/gate"
+	"github.com/bychannel/cherry-server/nodes/master"
+	"github.com/bychannel/cherry-server/nodes/web"
 	cherryConst "github.com/cherry-game/cherry/const"
-	"github.com/cherry-game/examples/demo_cluster/nodes/center"
-	"github.com/cherry-game/examples/demo_cluster/nodes/game"
-	"github.com/cherry-game/examples/demo_cluster/nodes/gate"
-	"github.com/cherry-game/examples/demo_cluster/nodes/master"
-	"github.com/cherry-game/examples/demo_cluster/nodes/web"
 	"github.com/urfave/cli/v2"
 )
 
