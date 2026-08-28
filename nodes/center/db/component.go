@@ -34,7 +34,7 @@ func (c *Component) OnAfterInit() {
 }
 
 func (*Component) OnStop() {
-	//组件停止时触发逻辑
+	// 组件停止时触发逻辑
 }
 
 func New() *Component {
