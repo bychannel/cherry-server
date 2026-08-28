@@ -40,14 +40,14 @@ func (p *ActorAgent) setSession(req *pb.StringKeyValue) {
 		return
 	}
 
-	if agent, ok := pomelo.GetAgent(p.ActorID()); ok {
+	if agent, ok := pomelo.GetAgentWithSID(p.ActorID()); ok {
 		agent.Session().Set(req.Key, req.Value)
 	}
 }
 
 // login 用户登录，验证帐号 (*pb.LoginResponse, int32)
 func (p *ActorAgent) login(session *cproto.Session, req *pb.LoginRequest) {
-	agent, found := pomelo.GetAgent(p.ActorID())
+	agent, found := pomelo.GetAgent(session.GetSid(), session.GetUid())
 	if !found {
 		return
 	}
