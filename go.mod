@@ -8,12 +8,14 @@ require (
 	github.com/cherry-game/components/data-config v1.5.0
 	github.com/cherry-game/components/gin v1.5.0
 	github.com/cherry-game/components/gops v1.5.0
+	github.com/cherry-game/components/gorm v1.5.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/goburrow/cache v0.1.4
 	github.com/json-iterator/go v1.1.12
 	github.com/spf13/cast v1.5.1
 	github.com/urfave/cli/v2 v2.25.7
 	google.golang.org/protobuf v1.33.0
+	gorm.io/gorm v1.25.5
 )
 
 require (
@@ -28,9 +30,12 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.14.0 // indirect
 	github.com/go-redis/redis/v8 v8.11.5 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/google/gops v0.3.28 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
@@ -57,4 +62,5 @@ require (
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	gorm.io/driver/mysql v1.5.2 // indirect
 )

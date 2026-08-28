@@ -4,7 +4,8 @@
   "print_level": "info",
   "include": [
     "include/logger.json",
-    "include/data-config.json"
+    "include/data-config.json",
+    "include/db.json"
   ],
   "@include": "include用于引用其他的配置文件。多环境配置的开发过程中可以抽像一些通用的配置",
   "cluster": {
@@ -40,6 +41,9 @@
         "node_id": "gc-center",
         "address": "",
         "__settings__": {
+          "db_id_list": {
+            "center_db_id": "center_db_1"
+          },
           "ref_logger": "center_log"
         },
         "enable": true

@@ -1,0 +1,32 @@
+{
+  "db": {
+    "center_db_group": [
+      {
+        "enable": true,
+        "db_id": "center_db_1",
+        "dsn" : "",
+        "db_name": "center",
+        "host": "127.0.0.1",
+        "user_name": "root",
+        "password": "123456",
+        "max_idle_connect": 4,
+        "max_open_connect": 8,
+        "log_mode": true
+      }
+    ],
+    "game_db_group": [
+      {
+        "enable": true,
+        "db_id": "game_db_1",
+        "dsn" : "",
+        "db_name": "game",
+        "host": "127.0.0.1",
+        "user_name": "root",
+        "password": "123456",
+        "max_idle_connect": 4,
+        "max_open_connect": 8,
+        "log_mode": true
+      }
+    ]
+  }
+}
