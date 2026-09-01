@@ -12,12 +12,12 @@ import (
 
 // PlayerTable 角色基础表
 type PlayerTable struct {
-	PID            int32  `gorm:"column:pid;comment:'平台id'" json:"pid"`
+	PlayerId       int64  `gorm:"column:player_id;primary_key;comment:'角色id'" json:"playerId"`
+	PackageId      int32  `gorm:"column:package_id;comment:'平台id'" json:"packageId"`
 	OpenId         string `gorm:"column:open_id;comment:'平台open_id'" json:"openId"`
-	UID            int64  `gorm:"column:uid;comment:'用户id'" json:"uid"`
+	UserId         int64  `gorm:"column:user_id;comment:'用户id'" json:"userId"`
 	ServerId       int32  `gorm:"column:server_id;comment:'创角时的游戏服id'" json:"serverId"`
 	MergedServerId int32  `gorm:"column:merged_server_id;comment:'合服后的游戏服id'" json:"mergedServerId"`
-	PlayerId       int64  `gorm:"column:player_id;primary_key;comment:'角色id'" json:"playerId"`
 	Name           string `gorm:"column:player_name;comment:'角色名称'" json:"name"`
 	Gender         int32  `gorm:"column:gender;comment:'角色性别'" json:"gender"`
 	Level          int32  `gorm:"column:level;comment:'角色等级'" json:"level"`
@@ -45,25 +45,25 @@ func CreatePlayer(session *cproto.Session, name string, serverId int32, playerIn
 	}
 
 	playerId := guid.Next() // new player id
-	pid := session.GetInt32(sessionKey.PackageId)
+	packageId := session.GetInt32(sessionKey.PackageId)
 	openId := session.GetString(sessionKey.OpenID)
 
-	if session.Uid < 1 || pid < 1 || openId == "" {
-		clog.Warnf("create playerTable fail. pid or openId is error. [name = %s, pid = %v, openId = %v]",
+	if session.Uid < 1 || packageId < 1 || openId == "" {
+		clog.Warnf("create playerTable fail. packageId or openId is error. [name = %s, packageId = %v, openId = %v]",
 			name,
-			pid,
+			packageId,
 			openId,
 		)
 		return nil, code.PlayerCreateFail
 	}
 
 	playerTable := &PlayerTable{
-		PID:            pid,
+		PlayerId:       playerId,
+		PackageId:      packageId,
 		OpenId:         openId,
-		UID:            session.Uid,
+		UserId:         session.Uid,
 		ServerId:       serverId,
 		MergedServerId: serverId,
-		PlayerId:       playerId,
 		Name:           name,
 		Gender:         playerInit.Gender,
 		Level:          playerInit.Level,
@@ -74,7 +74,7 @@ func CreatePlayer(session *cproto.Session, name string, serverId int32, playerIn
 	// 先进缓存
 	playerTableCache.Put(playerId, playerTable)
 	playerNameCache.Put(name, playerTable.PlayerId) // 缓存角色名
-	uidCache.Put(playerTable.UID, playerId)
+	uidCache.Put(playerTable.UserId, playerId)
 
 	// TODO 保存db
 

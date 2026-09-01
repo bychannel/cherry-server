@@ -20,7 +20,7 @@ type (
 		pomelo.ActorBase
 		isOnline bool // 玩家是否在线
 		playerId int64
-		uid      int64
+		userId   int64
 	}
 )
 
@@ -41,11 +41,11 @@ func (p *actorPlayer) OnStop() {
 
 // sessionClose 接收角色session关闭处理
 func (p *actorPlayer) sessionClose() {
-	online.UnBindPlayer(p.uid)
+	online.UnBindPlayer(p.userId)
 	p.isOnline = false
 	p.Exit()
 
-	clog.Debugf("[actorPlayer] exit! uis = %d", p.uid)
+	clog.Debugf("[actorPlayer] exit! uis = %d", p.userId)
 }
 
 // playerSelect 玩家查询角色列表
@@ -129,7 +129,7 @@ func (p *actorPlayer) playerEnter(session *cproto.Session, req *pb.Int64) {
 	}
 
 	// 保存进入游戏的玩家对应的agentPath
-	online.BindPlayer(playerId, playerTable.UID, session.AgentPath)
+	online.BindPlayer(playerId, playerTable.UserId, session.AgentPath)
 
 	// 设置网关节点session的PlayerID属性
 	p.Call(session.ActorPath(), "setSession", &pb.StringKeyValue{
@@ -137,7 +137,7 @@ func (p *actorPlayer) playerEnter(session *cproto.Session, req *pb.Int64) {
 		Value: cstring.ToString(playerId),
 	})
 
-	p.uid = playerTable.UID
+	p.userId = playerTable.UserId
 	p.playerId = playerTable.PlayerId
 	p.isOnline = true // 设置为在线状态
 

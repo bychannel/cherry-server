@@ -2,7 +2,7 @@ package player
 
 import (
 	"time"
-	
+
 	"github.com/bychannel/cherry-server/internal/event"
 	"github.com/bychannel/cherry-server/nodes/game/module/online"
 	cfacade "github.com/cherry-game/cherry/facade"
