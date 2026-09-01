@@ -7,8 +7,8 @@ import (
 
 var (
 
-	// uid缓存 key:uidKey, value:uid
-	uidCache = cache.New(
+	// userid缓存 key:userIdKey, value:userid
+	userIdCache = cache.New(
 		cache.WithMaximumSize(65535),
 		cache.WithExpireAfterAccess(120*time.Minute),
 	)
@@ -22,5 +22,5 @@ var (
 
 // cache key
 const (
-	uidKey = "uid.%d.%s" //pid,openId
+	userIdKey = "userid.%d.%s" // packageId,openId
 )

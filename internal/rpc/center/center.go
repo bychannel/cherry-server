@@ -22,7 +22,7 @@ const (
 	ping               = "ping"
 	registerDevAccount = "registerDevAccount"
 	getDevAccount      = "getDevAccount"
-	getUID             = "getUID"
+	getUserId          = "getUserId"
 )
 
 const (
@@ -83,17 +83,17 @@ func GetDevAccount(app cfacade.IApplication, accountName, password string) int64
 	return rsp.Value
 }
 
-// GetUID 获取帐号UID
-func GetUID(app cfacade.IApplication, sdkId, pid int32, openId string) (cfacade.UID, int32) {
+// GetUserId 获取帐号UserId
+func GetUserId(app cfacade.IApplication, sdkId, packageId int32, openId string) (cfacade.UID, int32) {
 	req := &pb.User{
-		SdkId:  sdkId,
-		Pid:    pid,
-		OpenId: openId,
+		SdkId:     sdkId,
+		PackageId: packageId,
+		OpenId:    openId,
 	}
 
 	targetPath := GetTargetPath(app, accountActor)
 	rsp := &pb.Int64{}
-	errCode := app.ActorSystem().CallWait(sourcePath, targetPath, getUID, req, rsp)
+	errCode := app.ActorSystem().CallWait(sourcePath, targetPath, getUserId, req, rsp)
 	if code.IsFail(errCode) {
 		clog.Warnf("[GetUID] errCode = %v", errCode)
 		return 0, errCode

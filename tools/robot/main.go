@@ -3,12 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/bychannel/cherry-server/tools/robot/base"
 	"math/rand"
 	"sync"
 	"time"
 
 	"github.com/bychannel/cherry-server/internal/code"
+	"github.com/bychannel/cherry-server/tools/robot/base"
 	chttp "github.com/cherry-game/cherry/extend/http"
 	clog "github.com/cherry-game/cherry/logger"
 	pomeloClient "github.com/cherry-game/cherry/net/parser/pomelo/client"
@@ -33,7 +33,7 @@ func main() {
 
 	for userName, password := range accounts {
 		time.Sleep(time.Duration(rand.Int31n(10)) * time.Millisecond)
-		go RunRobot(cfg.WebUrl, cfg.Pid, userName, password, cfg.GateAddr, cfg.ServerId, cfg.PrintLog)
+		go RunRobot(cfg.WebUrl, cfg.PackageId, userName, password, cfg.GateAddr, cfg.ServerId, cfg.PrintLog)
 	}
 
 	wg.Wait()
@@ -65,7 +65,7 @@ func RegisterDevAccount(webUrl string, accounts map[string]string) {
 	}
 }
 
-func RunRobot(webUrl, pid, userName, password, gateAddr string, serverId int32, printLog bool) *base.Robot {
+func RunRobot(webUrl, packageId, userName, password, gateAddr string, serverId int32, printLog bool) *base.Robot {
 
 	// 创建客户端
 	cli := base.New(
@@ -76,13 +76,13 @@ func RunRobot(webUrl, pid, userName, password, gateAddr string, serverId int32, 
 	)
 	cli.PrintLog = printLog
 
-	// 登录获取token
-	if err := cli.GetLoginToken(webUrl, pid, userName, password); err != nil {
+	// 第二步，到web节点登录，获取token
+	if err := cli.Login(webUrl, packageId, userName, password); err != nil {
 		clog.Error(err)
 		return nil
 	}
 
-	// 根据地址连接网关
+	// 第三步，根据地址连接网关
 	if err := cli.ConnectToTCP(gateAddr); err != nil {
 		clog.Error(err)
 		return nil
@@ -95,8 +95,8 @@ func RunRobot(webUrl, pid, userName, password, gateAddr string, serverId int32, 
 	// 随机休眠
 	cli.RandSleep()
 
-	// 用户登录到游戏节点
-	err := cli.UserLogin(serverId)
+	// 第四步，登录网关
+	err := cli.LoginGate(serverId)
 	if err != nil {
 		clog.Warn(err)
 		return nil

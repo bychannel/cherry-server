@@ -32,18 +32,18 @@ func (p *LoginController) register(c *cherryGin.Context) {
 	code.RenderResult(c, statusCode)
 }
 
-// login 根据pid获取sdkConfig，与第三方进行帐号登陆效验
-// http://127.0.0.1/login?pid=2126001&account=test1&password=test1
+// login 根据packageId获取sdkConfig，与第三方进行帐号登陆效验
+// http://127.0.0.1/login?packageId=2126001&account=test1&password=test1
 func (p *LoginController) login(c *cherryGin.Context) {
-	pid := c.GetInt32("pid", 0, true)
+	packageId := c.GetInt32("packageId", 0, true)
 
-	if pid < 1 {
-		cherryLogger.Warnf("if pid < 1 {. params=%s", c.GetParams())
+	if packageId < 1 {
+		cherryLogger.Warnf("if packageId < 1 {. params=%s", c.GetParams())
 		code.RenderResult(c, code.PIDError)
 		return
 	}
 
-	config := data.SdkConfig.Get(pid)
+	config := data.SdkConfig.Get(packageId)
 	if config == nil {
 		cherryLogger.Warnf("if platformConfig == nil {. params=%s", c.GetParams())
 		code.RenderResult(c, code.LoginError)
@@ -52,13 +52,13 @@ func (p *LoginController) login(c *cherryGin.Context) {
 
 	sdkInvoke, err := sdk.GetInvoke(config.SdkId)
 	if err != nil {
-		cherryLogger.Warnf("[pid = %d] get invoke error. params=%s", pid, c.GetParams())
+		cherryLogger.Warnf("[packageId = %d] get invoke error. params=%s", packageId, c.GetParams())
 		code.RenderResult(c, code.PIDError)
 		return
 	}
 
 	params := c.GetParams(true)
-	params["pid"] = cherryString.ToString(pid)
+	params["packageId"] = cherryString.ToString(packageId)
 
 	// invoke login
 	sdkInvoke.Login(config, params, func(statusCode int32, result sdk.Params, error ...error) {
@@ -85,7 +85,7 @@ func (p *LoginController) login(c *cherryGin.Context) {
 			return
 		}
 
-		base64Token := token.New(pid, openId, config.Salt).ToBase64()
+		base64Token := token.New(packageId, openId, config.Salt).ToBase64()
 		code.RenderResult(c, code.OK, base64Token)
 	})
 }

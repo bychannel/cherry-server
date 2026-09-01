@@ -58,8 +58,8 @@ func (p *sdkConfig) OnLoad(maps interface{}, _ bool) (int, error) {
 func (p *sdkConfig) OnAfterLoad(_ bool) {
 }
 
-func (p *sdkConfig) Get(pid int32) *SdkRow {
-	platformRow, found := p.maps[pid]
+func (p *sdkConfig) Get(packageId int32) *SdkRow {
+	platformRow, found := p.maps[packageId]
 	if found {
 		return platformRow
 	}

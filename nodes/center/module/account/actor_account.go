@@ -23,7 +23,7 @@ func (p *ActorAccount) AliasID() string {
 func (p *ActorAccount) OnInit() {
 	p.Remote().Register("registerDevAccount", p.registerDevAccount)
 	p.Remote().Register("getDevAccount", p.getDevAccount)
-	p.Remote().Register("getUID", p.getUID)
+	p.Remote().Register("getUserId", p.getUserId)
 }
 
 // registerDevAccount 注册开发者帐号
@@ -59,12 +59,12 @@ func (p *ActorAccount) getDevAccount(req *pb.DevRegister) (*pb.Int64, int32) {
 	return &pb.Int64{Value: devAccount.AccountId}, code.OK
 }
 
-// getUID 获取uid
-func (p *ActorAccount) getUID(req *pb.User) (*pb.Int64, int32) {
-	uid, ok := db.BindUID(req.SdkId, req.Pid, req.OpenId)
-	if uid == 0 || ok == false {
+// getUserId 获取userId
+func (p *ActorAccount) getUserId(req *pb.User) (*pb.Int64, int32) {
+	userId, ok := db.BindUserId(req.SdkId, req.PackageId, req.OpenId)
+	if userId == 0 || ok == false {
 		return nil, code.AccountBindFail
 	}
 
-	return &pb.Int64{Value: uid}, code.OK
+	return &pb.Int64{Value: userId}, code.OK
 }

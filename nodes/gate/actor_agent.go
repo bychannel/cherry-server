@@ -60,20 +60,20 @@ func (p *ActorAgent) login(session *cproto.Session, req *pb.LoginRequest) {
 	}
 
 	// 验证pid是否配置
-	sdkRow := data.SdkConfig.Get(userToken.PID)
+	sdkRow := data.SdkConfig.Get(userToken.PackageId)
 	if sdkRow == nil {
 		agent.ResponseCode(session, code.PIDError, true)
 		return
 	}
 
-	// 根据token带来的sdk参数，从中心节点获取uid
-	uid, errCode := rpcCenter.GetUID(p.App(), sdkRow.SdkId, userToken.PID, userToken.OpenID)
-	if uid == 0 || code.IsFail(errCode) {
+	// 根据token带来的sdk参数，从中心节点获取userid
+	userId, errCode := rpcCenter.GetUserId(p.App(), sdkRow.SdkId, userToken.PackageId, userToken.OpenID)
+	if userId == 0 || code.IsFail(errCode) {
 		agent.ResponseCode(session, code.AccountBindFail, true)
 		return
 	}
 
-	oldAgent, err := pomelo.Bind(session.Sid, uid)
+	oldAgent, err := pomelo.Bind(session.Sid, userId)
 	if err != nil {
 		agent.ResponseCode(session, code.AccountBindFail, true)
 		clog.Warn(err)
@@ -85,16 +85,16 @@ func (p *ActorAgent) login(session *cproto.Session, req *pb.LoginRequest) {
 		oldAgent.Kick(duplicateLoginCode, true)
 	}
 
-	p.checkGateSession(uid)
+	p.checkGateSession(userId)
 
 	agent.Session().Set(sessionKey.ServerID, cstring.ToString(req.ServerId))
-	agent.Session().Set(sessionKey.PID, cstring.ToString(userToken.PID))
+	agent.Session().Set(sessionKey.PackageId, cstring.ToString(userToken.PackageId))
 	agent.Session().Set(sessionKey.OpenID, userToken.OpenID)
 
 	response := &pb.LoginResponse{
-		Uid:    uid,
-		Pid:    userToken.PID,
-		OpenId: userToken.OpenID,
+		UserId:    userId,
+		PackageId: userToken.PackageId,
+		OpenId:    userToken.OpenID,
 	}
 
 	agent.Response(session, response)
@@ -106,7 +106,7 @@ func (p *ActorAgent) validateToken(base64Token string) (*token.Token, int32) {
 		return nil, code.AccountTokenValidateFail
 	}
 
-	platformRow := data.SdkConfig.Get(userToken.PID)
+	platformRow := data.SdkConfig.Get(userToken.PackageId)
 	if platformRow == nil {
 		return nil, code.PIDError
 	}

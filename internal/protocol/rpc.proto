@@ -12,7 +12,7 @@ message DevRegister {
 // 用户信息
 message User {
   int32  sdkId = 1;    // sdk id
-  int32  pid = 2;      // 包id
+  int32  packageId = 2;      // 包id
   string openId = 3;   // sdk的openid
   int32  serverId = 4; // 所在游戏服id
   int64  uid = 5;      // 用户id

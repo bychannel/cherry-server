@@ -3,7 +3,7 @@ package token
 import (
 	"encoding/json"
 	"fmt"
-	
+
 	"github.com/bychannel/cherry-server/internal/code"
 	cherryCrypto "github.com/cherry-game/cherry/extend/crypto"
 	cherryTime "github.com/cherry-game/cherry/extend/time"
@@ -11,20 +11,20 @@ import (
 )
 
 const (
-	hashFormat      = "pid:%d,openid:%s,timestamp:%d"
+	hashFormat      = "packageid:%d,openid:%s,timestamp:%d"
 	tokenExpiredDay = 3
 )
 
 type Token struct {
-	PID       int32  `json:"pid"`
+	PackageId int32  `json:"package_id"`
 	OpenID    string `json:"open_id"`
 	Timestamp int64  `json:"tt"`
 	Hash      string `json:"hash"`
 }
 
-func New(pid int32, openId string, appKey string) *Token {
+func New(packageId int32, openId string, appKey string) *Token {
 	token := &Token{
-		PID:       pid,
+		PackageId: packageId,
 		OpenID:    openId,
 		Timestamp: cherryTime.Now().ToMillisecond(),
 	}
@@ -78,6 +78,6 @@ func Validate(token *Token, appKey string) (int32, bool) {
 }
 
 func BuildHash(t *Token, appKey string) string {
-	value := fmt.Sprintf(hashFormat, t.PID, t.OpenID, t.Timestamp)
+	value := fmt.Sprintf(hashFormat, t.PackageId, t.OpenID, t.Timestamp)
 	return cherryCrypto.MD5(value + appKey)
 }

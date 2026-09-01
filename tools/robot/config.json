@@ -3,6 +3,6 @@
   "webUrl": "http://127.0.0.1:8081",
   "gateAddr": "127.0.0.1:10011",
   "serverId": 10001,
-  "pid": "2126001",
+  "packageId": "2126001",
   "printLog": false
 }

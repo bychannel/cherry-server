@@ -45,7 +45,7 @@ func CreatePlayer(session *cproto.Session, name string, serverId int32, playerIn
 	}
 
 	playerId := guid.Next() // new player id
-	pid := session.GetInt32(sessionKey.PID)
+	pid := session.GetInt32(sessionKey.PackageId)
 	openId := session.GetString(sessionKey.OpenID)
 
 	if session.Uid < 1 || pid < 1 || openId == "" {

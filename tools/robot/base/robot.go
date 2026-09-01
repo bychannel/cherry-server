@@ -22,8 +22,8 @@ type (
 		PrintLog   bool
 		Token      string
 		ServerId   int32
-		PID        int32
-		UID        int64
+		PackageId  int32
+		UserId     int64
 		OpenId     string
 		PlayerId   int64
 		PlayerName string
@@ -37,15 +37,15 @@ func New(client *cherryClient.Client) *Robot {
 	}
 }
 
-// GetLoginToken  http登录获取token对象
-// http://172.16.124.137/login?pid=2126003&account=test1&password=test1
-func (p *Robot) GetLoginToken(url string, pid, userName, password string) error {
+// Login  http登录获取token对象
+// http://172.16.124.137/login?packageId=2126003&account=test1&password=test1
+func (p *Robot) Login(webUrl string, packageId, userName, password string) error {
 	// http登陆获取token json对象
-	requestURL := fmt.Sprintf("%s/login", url)
+	requestURL := fmt.Sprintf("%s/login", webUrl)
 	jsonBytes, _, err := cherryHttp.GET(requestURL, map[string]string{
-		"pid":      pid,      // sdk包id
-		"account":  userName, // 帐号名
-		"password": password, // 密码
+		"packageId": packageId, // sdk包id
+		"account":   userName,  // 帐号名
+		"password":  password,  // 密码
 	})
 
 	if err != nil {
@@ -64,17 +64,17 @@ func (p *Robot) GetLoginToken(url string, pid, userName, password string) error 
 
 	// 获取token值
 	p.Token = rsp.Data.(string)
-	p.TagName = fmt.Sprintf("%s_%s", pid, userName)
+	p.TagName = fmt.Sprintf("%s_%s", packageId, userName)
 	p.StartTime = cherryTime.Now()
 
 	return nil
 }
 
-// UserLogin 用户登录对某游戏服
-func (p *Robot) UserLogin(serverId int32) error {
+// LoginGate 用户登录对某游戏服
+func (p *Robot) LoginGate(serverId int32) error {
 	route := "gate.user.login"
 
-	p.Debugf("[%s] [UserLogin] request ServerID = %d", p.TagName, serverId)
+	p.Debugf("[%s] [LoginGate] request ServerID = %d", p.TagName, serverId)
 
 	msg, err := p.Request(route, &pb.LoginRequest{
 		ServerId: serverId,
@@ -94,11 +94,11 @@ func (p *Robot) UserLogin(serverId int32) error {
 		return err
 	}
 
-	p.UID = rsp.Uid
-	p.PID = rsp.Pid
+	p.UserId = rsp.UserId
+	p.PackageId = rsp.PackageId
 	p.OpenId = rsp.OpenId
 
-	p.Debugf("[%s] [UserLogin] response = %+v", p.TagName, rsp)
+	p.Debugf("[%s] [LoginGate] response = %+v", p.TagName, rsp)
 	return nil
 }
 
