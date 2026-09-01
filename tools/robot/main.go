@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/bychannel/cherry-server/tools/robot/base"
-	"github.com/bychannel/cherry-server/tools/robot/conf"
 	"math/rand"
 	"sync"
 	"time"
@@ -15,10 +14,10 @@ import (
 	pomeloClient "github.com/cherry-game/cherry/net/parser/pomelo/client"
 )
 
-var cfg *conf.Config
+var cfg *base.Config
 
 func main() {
-	cfg = conf.LoadConfig("./conf/config.json")
+	cfg = base.LoadConfig("./config.json")
 
 	wg := sync.WaitGroup{}
 	wg.Add(1)
